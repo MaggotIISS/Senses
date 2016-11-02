@@ -72,6 +72,7 @@ public class SensesController implements Initializable {
   @FXML
   private Label l3;
   //</editor-fold>
+
   //<editor-fold defaultstate="collapsed" desc="Variables">
   private String[] senses = {"Vision", "Hearing", "Smell", "Touch", "Awareness", "Perception"};
   private String[] races = {"Human", "Vargr", "Aslan", "Droyne", "K`kree", "Hiver"};
@@ -85,11 +86,113 @@ public class SensesController implements Initializable {
   private String touchString = "";
   private String awareString = "";
   private String percepString = "";
-
+  private String[] HearingBenchmark;
+  private String[] AwarenessMassBenchmark;
+  private String[] AwarenessElectricBenchmark;
+  private String[] AwarenessMagneticBenchmark;
+  private String[] PerceptionLifeBenchmark;
+  private String[] PerceptionThoughtBenchmark;
   //</editor-fold>
+
+  String[] RangeBenchmark;
+  String[] VisonBenchmark;
+
   //<editor-fold defaultstate="collapsed" desc="FXMethods">
   @Override
   public void initialize(URL url, ResourceBundle rb) {
+    String[] RangeBenchmark;
+    String[] VisonBenchmark;
+
+    RangeBenchmark = new String[]{
+      "0	Contact 0m",
+      "1	VShort 5m",
+      "2	Short 50m",
+      "3	Medium 150m",
+      "4	Long 500m",
+      "5	VLong 1000m",
+      "6	Distant 5000m",
+      "7	VDistant	50km",
+      "8	Orbit 500km",
+      "9	FarOrbit	5000km"
+    };
+
+    VisonBenchmark = new String[]{
+      "0	Contact 0m",
+      "R	Reading 0m",
+      "T	Touch 0m",
+      "1	VShort 5m",
+      "2	Short 50m",
+      "3	Medium 150m",
+      "4	Long 500m",
+      "5	VLong 1000m",
+      "6	Distant 5km",
+      "7	VDistant 50km"
+    };
+
+    HearingBenchmark = new String[]{
+      "0 Earpiece 0m Contact",
+      "R Reading 0m Whisper",
+      "T Talking 0m Talking",
+      "1 VShort 5m Lecture",
+      "2 Short 50m Shout",
+      "3 Medium 150m Distress",
+      "4 Long 500m Distress!!",
+      "5 VLong 1000m Pistol",
+      "6 Distant 5km Storm",
+      "7 Gunshot 50km Nuke"
+    };
+
+    AwarenessMassBenchmark = new String[]{
+      "R Coin",
+      "T Cards",
+      "1 Book",
+      "2 Suitcase",
+      "3 Human",
+      "4 Hvy m/c",
+      "5 Buildings",
+      "6 Hills",
+      "7 Mountains"
+    };
+
+    AwarenessElectricBenchmark = new String[]{
+      "1 SD Card",
+      "2 Mobile",
+      "3 Circuit Board",
+      "4 Hvy m/c",
+      "5 Town",
+      "6 Grid",
+      "7 Lightning"
+    };
+
+    AwarenessMagneticBenchmark = new String[]{
+      "1 Coin",
+      "2 Pistol",
+      "3 Rifle",
+      "4 Cooker",
+      "5 Vehicle",
+      "6 Town",
+      "7 Country"
+    };
+
+    PerceptionLifeBenchmark = new String[]{
+      "1 Flea",
+      "2 Butterfly",
+      "3 Mouse",
+      "4 Dog",
+      "5 Bull",
+      "6 Elephant",
+      "7 Whale"
+    };
+
+    PerceptionThoughtBenchmark = new String[]{
+      "1 Calm life process",
+      "2 Complex life process",
+      "3 Simple thought",
+      "4 Complex thought",
+      "5 Strong emotion",
+      "6 Death throes",
+      "7 Many Death throes"
+    };
     cb.getItems().addAll(senses);
     cb.getSelectionModel().selectFirst();
     race.getItems().addAll(races);
