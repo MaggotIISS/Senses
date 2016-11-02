@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -76,6 +77,8 @@ public class SensesController implements Initializable {
   private String[] races = {"Human", "Vargr", "Aslan", "Droyne", "K`kree", "Hiver"};
   private String CRLF = "\n";
   private ActionEvent ae;
+  @FXML
+  private TextArea ta;
   private String visionString = "";
   private String hearingString = "";
   private String smellString = "";
@@ -93,6 +96,41 @@ public class SensesController implements Initializable {
     race.getSelectionModel().selectFirst();
     raceChange(ae);
 
+  }
+
+  @FXML
+  private void line1(MouseEvent event) {
+    show(laba.getText());
+  }
+
+  @FXML
+  private void line2(MouseEvent event) {
+    show(labb.getText());
+  }
+
+  @FXML
+  private void line3(MouseEvent event) {
+    show(labc.getText());
+  }
+
+  @FXML
+  private void line4(MouseEvent event) {
+    show(labd.getText());
+  }
+
+  @FXML
+  private void line5(MouseEvent event) {
+    show(labe.getText());
+  }
+
+  @FXML
+  private void line6(MouseEvent event) {
+    show(labf.getText());
+  }
+
+  @FXML
+  private void line7(MouseEvent event) {
+    show(labg.getText());
   }
 
   @FXML
@@ -304,7 +342,7 @@ public class SensesController implements Initializable {
         //</editor-fold>
         //<editor-fold defaultstate="collapsed" desc="Hiver">
         case "Hiver": {
-          visionString = "16-CRG-360";
+          visionString = "16-CRG";
           hearingString = "16-9400";
           smellString = "12-2";
           touchString = "24-6";
@@ -348,6 +386,7 @@ public class SensesController implements Initializable {
 
   @FXML
   private void senseChange(ActionEvent event) {
+    System.out.println("senseChange");
     String r = race.getValue();
     String rr = cb.getValue();
     String s = "";
@@ -543,5 +582,71 @@ public class SensesController implements Initializable {
     labf.setText("");
     labg.setText("");
   }
+
+  private void show(String text) {
+    System.out.println(text);
+    String string = "";
+    ta.setText("\t" + text + CRLF);
+    switch (text) {
+      case "Band 1": {
+        break;
+      }
+      case "Band 2": {
+        break;
+      }
+      case "Band 3": {
+        break;
+      }
+      case "Frequency": {
+        break;
+      }
+      case "Span": {
+        break;
+      }
+      case "Voice": {
+        break;
+      }
+      case "Range": {
+        break;
+      }
+      case "Sharpness": {
+        break;
+      }
+      case "Primary": {
+        break;
+      }
+      case "Overtone": {
+        break;
+      }
+      case "Nuance": {
+        break;
+      }
+      case "Gender": {
+        break;
+      }
+      case "Caste": {
+        break;
+      }
+      case "Pheromone": {
+        break;
+      }
+      case "Sensitivity": {
+        break;
+      }
+      case "Acuity": {
+        break;
+      }
+      case "Tone": {
+        break;
+      }
+      case "PVoice": {
+        break;
+      }
+      default: {
+        System.out.println(text + "\tOOOOOOOOOOOOOOOOOO");
+      }
+    }
+  }
+
   //</editor-fold>
 }
