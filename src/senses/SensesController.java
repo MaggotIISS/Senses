@@ -5,8 +5,14 @@
  */
 package senses;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -73,171 +79,44 @@ public class SensesController implements Initializable {
   private Label l3;
   //</editor-fold>
 
-  //<editor-fold defaultstate="collapsed" desc="Variables">
-  private String[] senses = {"Vision", "Hearing", "Smell", "Touch", "Awareness", "Perception"};
-  private String[] races = {"Human", "Vargr", "Aslan", "Droyne", "K`kree", "Hiver"};
-  private String CRLF = "\n";
-  private ActionEvent ae;
-  @FXML
-  private TextArea ta;
-  private String visionString = "";
-  private String hearingString = "";
-  private String smellString = "";
-  private String touchString = "";
-  private String awareString = "";
-  private String percepString = "";
-  private String[] HearingBenchmark;
-  private String[] AwarenessMassBenchmark;
-  private String[] AwarenessElectricBenchmark;
-  private String[] AwarenessMagneticBenchmark;
-  private String[] PerceptionLifeBenchmark;
-  private String[] PerceptionThoughtBenchmark;
-  //</editor-fold>
-
-  String[] RangeBenchmark;
-  String[] VisonBenchmark;
-
   //<editor-fold defaultstate="collapsed" desc="FXMethods">
-  @Override
-  public void initialize(URL url, ResourceBundle rb) {
-    String[] RangeBenchmark;
-    String[] VisonBenchmark;
-
-    RangeBenchmark = new String[]{
-      "0	Contact 0m",
-      "1	VShort 5m",
-      "2	Short 50m",
-      "3	Medium 150m",
-      "4	Long 500m",
-      "5	VLong 1000m",
-      "6	Distant 5000m",
-      "7	VDistant	50km",
-      "8	Orbit 500km",
-      "9	FarOrbit	5000km"
-    };
-
-    VisonBenchmark = new String[]{
-      "0	Contact 0m",
-      "R	Reading 0m",
-      "T	Touch 0m",
-      "1	VShort 5m",
-      "2	Short 50m",
-      "3	Medium 150m",
-      "4	Long 500m",
-      "5	VLong 1000m",
-      "6	Distant 5km",
-      "7	VDistant 50km"
-    };
-
-    HearingBenchmark = new String[]{
-      "0 Earpiece 0m Contact",
-      "R Reading 0m Whisper",
-      "T Talking 0m Talking",
-      "1 VShort 5m Lecture",
-      "2 Short 50m Shout",
-      "3 Medium 150m Distress",
-      "4 Long 500m Distress!!",
-      "5 VLong 1000m Pistol",
-      "6 Distant 5km Storm",
-      "7 Gunshot 50km Nuke"
-    };
-
-    AwarenessMassBenchmark = new String[]{
-      "R Coin",
-      "T Cards",
-      "1 Book",
-      "2 Suitcase",
-      "3 Human",
-      "4 Hvy m/c",
-      "5 Buildings",
-      "6 Hills",
-      "7 Mountains"
-    };
-
-    AwarenessElectricBenchmark = new String[]{
-      "1 SD Card",
-      "2 Mobile",
-      "3 Circuit Board",
-      "4 Hvy m/c",
-      "5 Town",
-      "6 Grid",
-      "7 Lightning"
-    };
-
-    AwarenessMagneticBenchmark = new String[]{
-      "1 Coin",
-      "2 Pistol",
-      "3 Rifle",
-      "4 Cooker",
-      "5 Vehicle",
-      "6 Town",
-      "7 Country"
-    };
-
-    PerceptionLifeBenchmark = new String[]{
-      "1 Flea",
-      "2 Butterfly",
-      "3 Mouse",
-      "4 Dog",
-      "5 Bull",
-      "6 Elephant",
-      "7 Whale"
-    };
-
-    PerceptionThoughtBenchmark = new String[]{
-      "1 Calm life process",
-      "2 Complex life process",
-      "3 Simple thought",
-      "4 Complex thought",
-      "5 Strong emotion",
-      "6 Death throes",
-      "7 Many Death throes"
-    };
-    cb.getItems().addAll(senses);
-    cb.getSelectionModel().selectFirst();
-    race.getItems().addAll(races);
-    race.getSelectionModel().selectFirst();
-    raceChange(ae);
-
-  }
-
   @FXML
-  private void line1(MouseEvent event) {
+  private void line1(MouseEvent event) throws IOException {
     show(laba.getText());
   }
 
   @FXML
-  private void line2(MouseEvent event) {
+  private void line2(MouseEvent event) throws IOException {
     show(labb.getText());
   }
 
   @FXML
-  private void line3(MouseEvent event) {
+  private void line3(MouseEvent event) throws IOException {
     show(labc.getText());
   }
 
   @FXML
-  private void line4(MouseEvent event) {
+  private void line4(MouseEvent event) throws IOException {
     show(labd.getText());
   }
 
   @FXML
-  private void line5(MouseEvent event) {
+  private void line5(MouseEvent event) throws IOException {
     show(labe.getText());
   }
 
   @FXML
-  private void line6(MouseEvent event) {
+  private void line6(MouseEvent event) throws IOException {
     show(labf.getText());
   }
 
   @FXML
-  private void line7(MouseEvent event) {
+  private void line7(MouseEvent event) throws IOException {
     show(labg.getText());
   }
 
   @FXML
-  private void raceChange(ActionEvent event) {
+  private void raceChange(ActionEvent event) throws IOException {
     //<editor-fold defaultstate="collapsed" desc="IFD">
     {
       String s = "";
@@ -488,11 +367,12 @@ public class SensesController implements Initializable {
   }
 
   @FXML
-  private void senseChange(ActionEvent event) {
+  private void senseChange(ActionEvent event) throws IOException {
     System.out.println("senseChange");
     String r = race.getValue();
     String rr = cb.getValue();
     String s = "";
+    String sense = "";
     String string = "";
     switch (rr) {
       case "Vision": {
@@ -506,6 +386,7 @@ public class SensesController implements Initializable {
         lb.setText("");
         lc.setText("");
         ld.setText("");
+        sense = "VISION";
         break;
       }
       case "Touch": {
@@ -519,6 +400,7 @@ public class SensesController implements Initializable {
         lb.setText("");
         lc.setText("");
         ld.setText("");
+        sense = "TOUCH";
         break;
       }
       case "Hearing": {
@@ -532,6 +414,7 @@ public class SensesController implements Initializable {
         lb.setText("");
         lc.setText("");
         ld.setText("");
+        sense = "HEARING";
         break;
       }
       case "Awareness": {
@@ -545,6 +428,7 @@ public class SensesController implements Initializable {
         lb.setText("");
         lc.setText("");
         ld.setText("");
+        sense = "AWARENESS";
         break;
       }
       case "Smell": {
@@ -558,6 +442,7 @@ public class SensesController implements Initializable {
         lb.setText("");
         lc.setText("");
         ld.setText("");
+        sense = "SMELL";
         break;
       }
       case "Perception": {
@@ -571,6 +456,7 @@ public class SensesController implements Initializable {
         lb.setText("");
         lc.setText("");
         ld.setText("");
+        sense = "PERCEPTION";
         break;
       }
     }
@@ -578,8 +464,14 @@ public class SensesController implements Initializable {
     a.setText(rr);
     b.setText(rr.substring(0, 1));
     System.out.println("string = " + string);
-    STRING.setText(string);
+    STRING.setText("\t" + string);
     updateString(string);
+    show(sense);
+  }
+
+  @FXML
+  private void senseClick(MouseEvent event) throws IOException {
+    senseChange(ae);
   }
 
   @FXML
@@ -608,12 +500,176 @@ public class SensesController implements Initializable {
       + "republished or distributed without the consent of \n"
       + "the author who contributed it.\n";
     JTextArea jta = new JTextArea(txt, 50, 50);
+    jta.setEditable(false);
     JScrollPane jsp = new JScrollPane(jta);
     jf.getContentPane().add(jsp);
     jf.setSize(500, 500);
     jf.setLocation(300, 300);
     jf.setVisible(true);
   }
+
+  //</editor-fold>
+  @Override
+  public void initialize(URL url, ResourceBundle rb) {
+    //<editor-fold defaultstate="collapsed" desc="initVariables">
+    RangeBenchmark = new String[]{
+      "0 Contact 0m",
+      "1 VShort 5m",
+      "2 Short 50m",
+      "3 Medium 150m",
+      "4 Long 500m",
+      "5 VLong 1000m",
+      "6 Distant 5000m",
+      "7 VDistant	50km",
+      "8 Orbit 500km",
+      "9 FarOrbit	5000km"
+    };
+
+    VisionBenchmark = new String[]{
+      "0 Contact 0m",
+      "R Reading 0m",
+      "T Touch 0m",
+      "1 VShort 5m",
+      "2 Short 50m",
+      "3 Medium 150m",
+      "4 Long 500m",
+      "5 VLong 1000m",
+      "6 Distant 5km",
+      "7 VDistant 50km"
+    };
+
+    HearingBenchmark = new String[]{
+      "0 Earpiece 0m Contact",
+      "R Reading 0m Whisper",
+      "T Talking 0m Talking",
+      "1 VShort 5m Lecture",
+      "2 Short 50m Shout",
+      "3 Medium 150m Distress",
+      "4 Long 500m Distress!!",
+      "5 VLong 1000m Pistol",
+      "6 Distant 5km Storm",
+      "7 Gunshot 50km Nuke"
+    };
+
+    SmellBenchmark = new String[]{
+      "0 ",
+      "R ",
+      "T ",
+      "1 ",
+      "2 ",
+      "3 ",
+      "4 ",
+      "5 ",
+      "6 ",
+      "7 ",
+      "8 "
+    };
+
+    TouchBenchmark = new String[]{
+      "0 ",
+      "R ",
+      "T ",
+      "1 ",
+      "2 ",
+      "3 ",
+      "4 ",
+      "5 ",
+      "6 ",
+      "7 ",
+      "8 "
+    };
+
+    AwarenessMassBenchmark = new String[]{
+      "R Coin",
+      "T Cards",
+      "1 Book",
+      "2 Suitcase",
+      "3 Human",
+      "4 Hvy m/c",
+      "5 Buildings",
+      "6 Hills",
+      "7 Mountains"
+    };
+
+    AwarenessElectricBenchmark = new String[]{
+      "1 SD Card",
+      "2 Mobile",
+      "3 Circuit Board",
+      "4 Hvy m/c",
+      "5 Town",
+      "6 Grid",
+      "7 Lightning"
+    };
+
+    AwarenessMagneticBenchmark = new String[]{
+      "1 Coin",
+      "2 Pistol",
+      "3 Rifle",
+      "4 Cooker",
+      "5 Vehicle",
+      "6 Town",
+      "7 Country"
+    };
+
+    PerceptionLifeBenchmark = new String[]{
+      "1 Flea",
+      "2 Butterfly",
+      "3 Mouse",
+      "4 Dog",
+      "5 Bull",
+      "6 Elephant",
+      "7 Whale"
+    };
+
+    PerceptionThoughtBenchmark = new String[]{
+      "1 Calm life process",
+      "2 Complex life process",
+      "3 Simple thought",
+      "4 Complex thought",
+      "5 Strong emotion",
+      "6 Death throes",
+      "7 Many Death throes"
+    };
+    //</editor-fold>
+    cb.getItems().addAll(senses);
+    cb.getSelectionModel().selectFirst();
+    race.getItems().addAll(races);
+    race.getSelectionModel().selectFirst();
+    try {
+      raceChange(ae);
+    } catch (IOException ex) {
+      Logger.getLogger(SensesController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  }
+
+  //<editor-fold defaultstate="collapsed" desc="Variables">
+  private String[] senses = {"Vision", "Hearing", "Smell", "Touch", "Awareness", "Perception"};
+  private String[] races = {"Human", "Vargr", "Aslan", "Droyne", "K`kree", "Hiver"};
+  private String CRLF = "\n";
+  private ActionEvent ae;
+  @FXML
+  private TextArea ta;
+
+  private String visionString = "";
+  private String hearingString = "";
+  private String smellString = "";
+  private String touchString = "";
+  private String awareString = "";
+  private String percepString = "";
+
+  private String[] RangeBenchmark;
+  private String[] VisionBenchmark;
+  private String[] HearingBenchmark;
+  private String[] SmellBenchmark;
+  private String[] TouchBenchmark;
+  private String[] AwarenessMassBenchmark;
+  private String[] AwarenessElectricBenchmark;
+  private String[] AwarenessMagneticBenchmark;
+  private String[] PerceptionLifeBenchmark;
+  private String[] PerceptionThoughtBenchmark;
+  private String TEXT = "";
+  private String[] LINES;
+  private String[] lines;
 
   //</editor-fold>
   //<editor-fold defaultstate="collapsed" desc="Methods">
@@ -686,11 +742,67 @@ public class SensesController implements Initializable {
     labg.setText("");
   }
 
-  private void show(String text) {
-    System.out.println(text);
-    String string = "";
-    ta.setText("\t" + text + CRLF);
+  private void showLines(String[] array) {
+    ta.setText("");
+    if (array != null) {
+      if (array.length > 0) {
+        for (int i = 0; i < array.length; i++) {
+          ta.appendText(array[i] + CRLF);
+        }
+      }
+    }
+  }
+
+  //</editor-fold>
+  private void add(String[] Benchmark, String name) {
+    System.out.println("Add " + name);
+    TEXT += CRLF + CRLF + "\t" + name.toUpperCase();
+    for (int i = 0; i < Benchmark.length; i++) {
+      TEXT += CRLF + Benchmark[i];
+    }
+    TEXT += CRLF;
+    LINES = new String[]{TEXT};
+    lines = LINES;
+  }
+
+  private void show(String text) throws IOException {
+    System.out.println("show " + text);
+    ta.setText("\t" + text.toUpperCase());
+    TEXT = text;
+    lines = new String[]{"\t" + text.toUpperCase()};
     switch (text) {
+      case "VISION": {
+        add(VisionBenchmark, "Vision Benchmark");
+        addTable("Vision.csv");
+        break;
+      }
+      case "HEARING": {
+        add(HearingBenchmark, "Hearing Benchmark");
+        addTable("Hearing.csv");
+        break;
+      }
+      case "SMELL": {
+        add(SmellBenchmark, "Smell Benchmark");
+        addTable("Smell.csv");
+        break;
+      }
+      case "TOUCH": {
+        add(TouchBenchmark, "Touch Benchmark");
+        addTable("Touch.csv");
+        break;
+      }
+      case "AWARENESS": {
+        add(AwarenessMassBenchmark, "Mass");
+        add(AwarenessElectricBenchmark, "Electric");
+        add(AwarenessMagneticBenchmark, "Magnetic");
+        break;
+      }
+      case "PERCEPTION": {
+        add(PerceptionLifeBenchmark, "Life");
+        add(PerceptionThoughtBenchmark, "Thought");
+        break;
+      }
+      //////////////////////////////
       case "Band 1": {
         break;
       }
@@ -749,7 +861,29 @@ public class SensesController implements Initializable {
         System.out.println(text + "\tOOOOOOOOOOOOOOOOOO");
       }
     }
+    showLines(lines);
   }
 
-  //</editor-fold>
+  private void addTable(String txt) throws IOException {
+    String old = ta.getText();
+    try {
+      System.out.println("addTable " + txt);
+      String s = "C://T5/Senses/src/senses/" + txt;
+      try (BufferedReader br = new BufferedReader(new FileReader(s))) {
+        String contents;
+        TEXT += CRLF;
+        while ((contents = br.readLine()) != null) {
+          String line = contents.replace("\"", "").replace(",", "   ");
+          TEXT += line + CRLF;
+        }
+      }
+      lines = new String[]{TEXT};
+//      add(lines, txt);
+    } catch (FileNotFoundException ex) {
+      Logger.getLogger(SensesController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  }
+
+  /*
+   */
 }
