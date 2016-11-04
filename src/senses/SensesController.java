@@ -148,20 +148,6 @@ public class SensesController implements Initializable {
       "E Exotic"
     };
 
-    TouchBenchmark = new String[]{
-      "0 ",
-      "R ",
-      "T ",
-      "1 ",
-      "2 ",
-      "3 ",
-      "4 ",
-      "5 ",
-      "6 ",
-      "7 ",
-      "8 "
-    };
-
     AwarenessMassBenchmark = new String[]{
       "R Coin",
       "T Cards",
@@ -682,7 +668,7 @@ public class SensesController implements Initializable {
   private String[] VisionBenchmark;
   private String[] HearingBenchmark;
   private String[] SmellBenchmark;
-  private String[] TouchBenchmark;
+//  private String[] TouchBenchmark;
   private String[] AwarenessMassBenchmark;
   private String[] AwarenessElectricBenchmark;
   private String[] AwarenessMagneticBenchmark;
@@ -915,44 +901,120 @@ public class SensesController implements Initializable {
     TEXT = text;
     lines = new String[]{"\t" + text.toUpperCase()};
     switch (text) {
+      //////////////////////////////SENSES
+      //<editor-fold defaultstate="collapsed" desc="VISION">
       case "VISION": {
-        add(VisionBenchmark, "Vision Benchmark");
+        add(VisionBenchmark, "RANGE");
         addTable("Vision.csv");
-        add(new String[]{""}, text);
+        add(new String[]{""
+          + "To Notice Object: 2D < Constant + Benchmark + Mod + Mod" + CRLF
+          + "" + CRLF
+          + "RANGE\tRoll dice equal to R=Range" + CRLF
+          + text + "\tVision Constant for Race" + CRLF
+          + "BENCHMARK\tObject Size - R=Range" + CRLF
+          + "MODS\tMaster Mods Table" + CRLF
+        }, "Notice");
         break;
       }
+      //</editor-fold>
+      //<editor-fold defaultstate="collapsed" desc="HEARING">
       case "HEARING": {
-        add(HearingBenchmark, "Hearing Benchmark");
+        add(HearingBenchmark, text);
         addTable("Hearing.csv");
-        add(new String[]{""}, text);
+        add(new String[]{""
+          + "To Notice Sound: 2D < Constant + Benchmark + Mod + Mod" + CRLF
+          + "" + CRLF
+          + "RANGE\tRoll dice equal to R=Range" + CRLF
+          + text + "\tHearing Constant for Race" + CRLF
+          + "BENCHMARK\tObject Size - R=Range" + CRLF
+          + "MODS\tMaster Mods Table" + CRLF
+          + "" + CRLF
+          + "Delta Waves\tInduces/Promotes Sleep.\n\t\t5m + Check C3 or sleep\n\t\t(First time = 1D m, " + "Second time = 1D h)" + CRLF
+          + "Theta Waves\tInduces Hypnotic/Trance suggestive states" + CRLF
+          + "\t\t5m + Personals vs character may include Good Flux" + CRLF
+          + "Alpha Waves\tInduces Relaxation" + CRLF
+          + "\t\t5m + Feels sleepy" + CRLF
+          + "Beta Waves\tInduces Alertness" + CRLF
+          + "\t\t1m + Feels Ordinary for 1h" + CRLF
+          + "\t\t + Then returns to previous Attention level" + CRLF
+          + "\t\t + Many Alarms output at F=4 (Overuse check SAN)" + CRLF
+          + "Gamma Waves\tInduces Heightened Productivity" + CRLF
+          + "\t\t5m + Feels Optimal for 1h" + CRLF
+          + "\t\t1m + Then returns to previous Attention level" + CRLF
+        }, "Notice");
         break;
       }
+      //</editor-fold>
+      //<editor-fold defaultstate="collapsed" desc="SMELL">
       case "SMELL": {
-        add(SmellBenchmark, "Sharpness Benchmark");
+        add(SmellBenchmark, text);
         addTable("Odors.csv");
-        add(new String[]{""}, text);
+        add(new String[]{""
+          + "To Notice Scent: 2D < Constant + Benchmark + Mod + Mod" + CRLF
+          + "" + CRLF
+          + "RANGE\tRoll 2D" + CRLF
+          + text + "\tSmell Constant for Race" + CRLF
+          + "BENCHMARK\tSmell Intensity < 1 = no smell" + CRLF
+          + "MODS\tMaster Mods Table" + CRLF
+        }, "Notice");
         break;
       }
+      //</editor-fold>
+      //<editor-fold defaultstate="collapsed" desc="TOUCH">
       case "TOUCH": {
-        add(TouchBenchmark, "Touch Benchmark");
-        addTable("Touch.csv");
-        add(new String[]{""}, text);
+        addTable("Manipulators.csv");
+        add(new String[]{""
+          + "To Notice Texture: 2D < Constant + Benchmark + Mod + Mod" + CRLF
+          + "" + CRLF
+          + text + "\tTouch Constant for Race" + CRLF
+          + "BENCHMARK\tObject Texture" + CRLF
+          + "MODS\tManipulator Mods Table" + CRLF
+          + "SENSITIVITY = NUMBER OF RETRIES ALLOWED" + CRLF
+        }, "Notice");
+        addTable("Manipulators.csv");
         break;
       }
-      case "AWARENESS": {
-        add(AwarenessMassBenchmark, "Mass Benchmark");
-        add(AwarenessElectricBenchmark, "Electric Benchmark");
-        add(AwarenessMagneticBenchmark, "Magnetic Benchmark");
-        add(new String[]{""}, text);
-        break;
-      }
+      //</editor-fold>
+      //<editor-fold defaultstate="collapsed" desc="PERCEPTION">
       case "PERCEPTION": {
         add(PerceptionLifeBenchmark, "Life Benchmark");
         add(PerceptionThoughtBenchmark, "Thought Benchmark");
-        add(new String[]{""}, text);
+        add(new String[]{""
+          + "To Notice Aura: 2D < Constant + Benchmark + Mod + Mod" + CRLF
+          + "" + CRLF
+          + "RANGE\tRoll dice equal to R=Range" + CRLF
+          + text + "\tPerception Constant for Race" + CRLF
+          + "BENCHMARK\tObject Size - R=Range" + CRLF
+          + "MODS\tMaster Mods Table" + CRLF
+        }, "Notice");
         break;
       }
+      //</editor-fold>
+      //<editor-fold defaultstate="collapsed" desc="AWARENESS">
+      case "AWARENESS": {
+        add(AwarenessMassBenchmark, "Mass");
+        add(AwarenessElectricBenchmark, "Lek");
+        add(AwarenessMagneticBenchmark, "Mag");
+        add(new String[]{""
+          + "To Notice Field: 2D < Constant + Benchmark + Mod + Mod" + CRLF
+          + "" + CRLF
+          + "RANGE\tRoll dice equal to R=Range" + CRLF
+          + text + "\tAware Constant for Race" + CRLF
+          + "BENCHMARK\tObject Size - R=Range" + CRLF
+          + "MODS\tMaster Mods Table" + CRLF
+          + "" + CRLF
+          + "L = Lek = Color Associated with Electric Fields" + CRLF
+          + "M = Mag = Color Associated with Magnetic Fields" + CRLF
+          + "" + CRLF
+          + "Direction" + CRLF
+          + "Local Features" + CRLF
+          + "Electric & Magnetic Fields" + CRLF
+        }, "Notice");
+        break;
+      }
+      //</editor-fold>
       //////////////////////////////Vision
+      //<editor-fold defaultstate="collapsed" desc="Band 1">
       case "Band 1": {
         add(new String[]{}, "High Band");
         addTable("Vision.csv");
@@ -961,6 +1023,8 @@ public class SensesController implements Initializable {
         add(new String[]{labeltext}, "High Band");
         break;
       }
+      //</editor-fold>
+      //<editor-fold defaultstate="collapsed" desc="Band 2">
       case "Band 2": {
         add(new String[]{}, "Medium Band");
         addTable("Vision.csv");
@@ -969,6 +1033,8 @@ public class SensesController implements Initializable {
         add(new String[]{labeltext}, "Medium Band");
         break;
       }
+      //</editor-fold>
+      //<editor-fold defaultstate="collapsed" desc="Band 3">
       case "Band 3": {
         add(new String[]{}, "Low Band");
         addTable("Vision.csv");
@@ -977,7 +1043,9 @@ public class SensesController implements Initializable {
         add(new String[]{labeltext}, "Low Band");
         break;
       }
+      //</editor-fold>
       //////////////////////////////Hearing
+      //<editor-fold defaultstate="collapsed" desc="Frequency">
       case "Frequency": {
         add(HearingBenchmark, "Hearing Benchmark");
         add(new String[]{""
@@ -989,28 +1057,43 @@ public class SensesController implements Initializable {
         addTable("Hearing.csv");
         break;
       }
+      //</editor-fold>
+      //<editor-fold defaultstate="collapsed" desc="Span">
       case "Span": {
         add(HearingBenchmark, "Hearing Benchmark");
         out2.setText(l1.getText().substring(1, 2));
-        add(new String[]{}, text);
+        add(new String[]{""
+          + "Span:\t" + out2.getText() + " Octaves above and below F=Frequency" + CRLF
+        }, text);
         addTable("Hearing.csv");
         break;
       }
+      //</editor-fold>
+      //<editor-fold defaultstate="collapsed" desc="Voice">
       case "Voice": {
         add(HearingBenchmark, "Hearing Benchmark");
         out3.setText(l1.getText().substring(2, 3));
-        add(new String[]{}, text);
+        add(new String[]{""
+          + "Voice:\tHuman Voice Centered on C5" + CRLF
+          + "Human Male is 1 Octave Lower @ C4" + CRLF
+        }, text);
         addTable("Hearing.csv");
         break;
       }
+      //</editor-fold>
+      //<editor-fold defaultstate="collapsed" desc="Range">
       case "Range": {
         add(HearingBenchmark, "Hearing Benchmark");
         out4.setText(l1.getText().substring(3, 4));
-        add(new String[]{}, text);
+        add(new String[]{""
+          + "Octaves Above & Below F=Frequency" + CRLF
+        }, text);
         addTable("Hearing.csv");
         break;
       }
+      //</editor-fold>
       //////////////////////////////Smell
+      //<editor-fold defaultstate="collapsed" desc="Sharpness">
       case "Sharpness": {
         add(SmellBenchmark, "Sharpness Benchmark");
         out1.setText(l1.getText().substring(0, 1));
@@ -1018,64 +1101,85 @@ public class SensesController implements Initializable {
         add(new String[]{}, text);
         break;
       }
+      //</editor-fold>
+      //<editor-fold defaultstate="collapsed" desc="Primary">
       case "Primary": {
         add(new String[]{}, "Primary");
         addTable("Odors.csv");
-//        add(new String[]{}, text);
+        add(new String[]{}, text);
         break;
       }
+      //</editor-fold>
+      //<editor-fold defaultstate="collapsed" desc="Overtone">
       case "Overtone": {
         add(new String[]{}, "Overtone");
         addTable("Odors.csv");
-//        add(new String[]{}, text);
+        add(new String[]{}, text);
         break;
       }
+      //</editor-fold>
+      //<editor-fold defaultstate="collapsed" desc="Nuance">
       case "Nuance": {
         add(new String[]{}, "Nuance");
         addTable("Odors.csv");
-//        add(new String[]{}, text);
+        add(new String[]{}, text);
         break;
       }
+      //</editor-fold>
+      //<editor-fold defaultstate="collapsed" desc="Diff 1/Gender">
       case "Diff 1/Gender": {
         add(new String[]{}, "Gender");
         addTable("Odors.csv");
-//        add(new String[]{}, text);
+        add(new String[]{}, text);
         break;
       }
+      //</editor-fold>
+      //<editor-fold defaultstate="collapsed" desc="Diff 2/Caste">
       case "Diff 2/Caste": {
         add(new String[]{}, "Caste");
         addTable("Odors.csv");
-        //       add(new String[]{}, text);
+        add(new String[]{}, text);
         break;
       }
+      //</editor-fold>
+      //<editor-fold defaultstate="collapsed" desc="Diff 3/Pheromone">
       case "Diff 3/Pheromone": {
         addTable("Odors.csv");
         add(new String[]{}, text);
-        //       addTable("Pheromone.csv");
+        addTable("Pheromone.csv");
         break;
       }
+      //</editor-fold>
       //////////////////////////////Touch
+      //<editor-fold defaultstate="collapsed" desc="Sensitivity">
       case "Sensitivity": {
         add(new String[]{}, "Sensitivity");
         out1.setText(l1.getText());
         break;
       }
+      //</editor-fold>
       //////////////////////////////Awareness
+      //<editor-fold defaultstate="collapsed" desc="Acuity">
       case "Acuity": {
         add(new String[]{}, "Acuity");
         out1.setText(l1.getText());
         break;
       }
+      //</editor-fold>
       //////////////////////////////Perception
+      //<editor-fold defaultstate="collapsed" desc="Tone">
       case "Tone": {
         add(new String[]{}, "Tone");
         out1.setText(l1.getText());
         break;
       }
+      //</editor-fold>
+      //<editor-fold defaultstate="collapsed" desc="comment">
       case "PVoice": {
         add(new String[]{}, "PVoice");
         break;
       }
+      //</editor-fold>
       default: {
         System.out.println(text + "\tOOOOOOOOOOOOOOOOOO");
       }
