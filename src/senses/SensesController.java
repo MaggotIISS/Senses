@@ -63,6 +63,21 @@ public class SensesController implements Initializable {
   private Label lc;
   @FXML
   private Label ld;
+  private MouseEvent me;
+  @FXML
+  private Label out1;
+  @FXML
+  private Label out2;
+  @FXML
+  private Label out3;
+  @FXML
+  private Label out4;
+  @FXML
+  private Label out5;
+  @FXML
+  private Label out6;
+  @FXML
+  private Label out7;
   @FXML
   private ComboBox<String> race;
   @FXML
@@ -466,6 +481,7 @@ public class SensesController implements Initializable {
     System.out.println("string = " + string);
     STRING.setText("\t" + string);
     updateString(string);
+    showLabels();
     show(sense);
   }
 
@@ -552,17 +568,14 @@ public class SensesController implements Initializable {
     };
 
     SmellBenchmark = new String[]{
-      "0 ",
-      "R ",
-      "T ",
-      "1 ",
-      "2 ",
-      "3 ",
-      "4 ",
-      "5 ",
-      "6 ",
-      "7 ",
-      "8 "
+      "0 Odorless",
+      "1 Slight",
+      "2 Aromatic",
+      "3 Strong",
+      "4 Intense",
+      "5 Overwhelming",
+      "H Harmful",
+      "E Exotic"
     };
 
     TouchBenchmark = new String[]{
@@ -640,6 +653,14 @@ public class SensesController implements Initializable {
     } catch (IOException ex) {
       Logger.getLogger(SensesController.class.getName()).log(Level.SEVERE, null, ex);
     }
+    cb.setValue("Smell");
+    try {
+      senseChange(ae);
+      MouseEvent me = null;
+      senseClick(me);
+    } catch (IOException ex) {
+      Logger.getLogger(SensesController.class.getName()).log(Level.SEVERE, null, ex);
+    }
   }
 
   //<editor-fold defaultstate="collapsed" desc="Variables">
@@ -672,6 +693,66 @@ public class SensesController implements Initializable {
   private String[] lines;
 
   //</editor-fold>
+  String string;
+
+  private void showLabels() {
+    //<editor-fold defaultstate="collapsed" desc="IFD">
+    {
+      String s = "";
+      boolean DEBUG = true;  // true or false;
+      if (DEBUG) { // true or false
+        s += "//////////////////////////////////////////////" + CRLF;
+        s += "\t" + Thread.currentThread().getStackTrace()[1].getMethodName() + CRLF;
+        //s += "" + " = " + "";
+        //s += "" + " = " + "";
+        System.out.print(s);
+      }
+    }
+    //</editor-fold>
+    clearLabels();
+    Label[] labs = {laba, labb, labc, labd, labe, labf, labg};
+    Label[] outs = {out1, out2, out3, out4, out5, out6, out7};
+    try {
+      for (int i = 0; i < outs.length; i++) {
+        if (labs[i].getText().equals(null)) {
+          break;
+        }
+        switch (i) {
+          case 0: {
+            line1(me);
+            break;
+          }
+          case 1: {
+            line2(me);
+            break;
+          }
+          case 2: {
+            line3(me);
+            break;
+          }
+          case 3: {
+            line4(me);
+            break;
+          }
+          case 4: {
+            line5(me);
+            break;
+          }
+          case 5: {
+            line6(me);
+            break;
+          }
+          case 6: {
+            line7(me);
+            break;
+          }
+        }
+      }
+    } catch (Exception e) {
+
+    }
+  }
+
   //<editor-fold defaultstate="collapsed" desc="Methods">
   private void updateString(String value) {
     System.out.println("value = " + value);
@@ -742,6 +823,16 @@ public class SensesController implements Initializable {
     labg.setText("");
   }
 
+  private void clearLabels() {
+    out1.setText("");
+    out2.setText("");
+    out3.setText("");
+    out4.setText("");
+    out5.setText("");
+    out6.setText("");
+    out7.setText("");
+  }
+
   private void showLines(String[] array) {
     ta.setText("");
     if (array != null) {
@@ -754,19 +845,20 @@ public class SensesController implements Initializable {
   }
 
   //</editor-fold>
-  private void add(String[] Benchmark, String name) {
-    System.out.println("Add " + name);
-    TEXT += CRLF + CRLF + "\t" + name.toUpperCase();
-    for (int i = 0; i < Benchmark.length; i++) {
-      TEXT += CRLF + Benchmark[i];
-    }
-    TEXT += CRLF;
-    LINES = new String[]{TEXT};
-    lines = LINES;
-  }
-
   private void show(String text) throws IOException {
-    System.out.println("show " + text);
+    //<editor-fold defaultstate="collapsed" desc="IFD">
+    {
+      String s = "";
+      boolean DEBUG = true;  // true or false;
+      if (DEBUG) { // true or false
+        s += "//////////////////////////////////////////////" + CRLF;
+        s += "\t" + Thread.currentThread().getStackTrace()[1].getMethodName() + CRLF;
+        //s += "" + " = " + "";
+        //s += "" + " = " + "";
+        System.out.print(s);
+      }
+    }
+    //</editor-fold>
     ta.setText("\t" + text.toUpperCase());
     TEXT = text;
     lines = new String[]{"\t" + text.toUpperCase()};
@@ -774,87 +866,152 @@ public class SensesController implements Initializable {
       case "VISION": {
         add(VisionBenchmark, "Vision Benchmark");
         addTable("Vision.csv");
+        add(new String[]{""}, text);
         break;
       }
       case "HEARING": {
         add(HearingBenchmark, "Hearing Benchmark");
         addTable("Hearing.csv");
+        add(new String[]{""}, text);
         break;
       }
       case "SMELL": {
-        add(SmellBenchmark, "Smell Benchmark");
-        addTable("Smell.csv");
+        add(SmellBenchmark, "Sharpness Benchmark");
+        addTable("Odors.csv");
+        add(new String[]{""}, text);
         break;
       }
       case "TOUCH": {
         add(TouchBenchmark, "Touch Benchmark");
         addTable("Touch.csv");
+        add(new String[]{""}, text);
         break;
       }
       case "AWARENESS": {
-        add(AwarenessMassBenchmark, "Mass");
-        add(AwarenessElectricBenchmark, "Electric");
-        add(AwarenessMagneticBenchmark, "Magnetic");
+        add(AwarenessMassBenchmark, "Mass Benchmark");
+        add(AwarenessElectricBenchmark, "Electric Benchmark");
+        add(AwarenessMagneticBenchmark, "Magnetic Benchmark");
+        add(new String[]{""}, text);
         break;
       }
       case "PERCEPTION": {
-        add(PerceptionLifeBenchmark, "Life");
-        add(PerceptionThoughtBenchmark, "Thought");
+        add(PerceptionLifeBenchmark, "Life Benchmark");
+        add(PerceptionThoughtBenchmark, "Thought Benchmark");
+        add(new String[]{""}, text);
         break;
       }
-      //////////////////////////////
+      //////////////////////////////Vision
       case "Band 1": {
+        add(new String[]{}, "High Band");
+        addTable("Vision.csv");
+        String labeltext = l1.getText().substring(0, 1);
+        add(new String[]{labeltext}, "High Band");
+        out1.setText(labeltext);
         break;
       }
       case "Band 2": {
+        add(new String[]{}, "Medium Band");
+        addTable("Vision.csv");
+        String labeltext = l1.getText().substring(1, 2);
+        add(new String[]{labeltext}, "Medium Band");
+        out2.setText(labeltext);
         break;
       }
       case "Band 3": {
+        add(new String[]{}, "Low Band");
+        addTable("Vision.csv");
+        String labeltext = l1.getText().substring(2, 3);
+        add(new String[]{labeltext}, "Low Band");
+        out3.setText(labeltext);
         break;
       }
+      //////////////////////////////Hearing
       case "Frequency": {
+        add(HearingBenchmark, "Hearing Benchmark");
+        add(new String[]{""
+          + "Human Audible from C2 to C8" + CRLF
+          + "Male Voice = C4" + CRLF
+          + "Female Voice = C5" + CRLF
+        }, "Frequency");
+        out1.setText(l1.getText().substring(0, 1));
         break;
       }
       case "Span": {
+        add(HearingBenchmark, "Hearing Benchmark");
+        add(new String[]{}, "Span");
+        out2.setText(l1.getText().substring(1, 2));
         break;
       }
       case "Voice": {
+        add(HearingBenchmark, "Hearing Benchmark");
+        add(new String[]{}, "Voice");
+        out3.setText(l1.getText().substring(2, 3));
         break;
       }
       case "Range": {
+        add(HearingBenchmark, "Hearing Benchmark");
+        add(new String[]{}, "Range");
         break;
       }
+      //////////////////////////////Smell
       case "Sharpness": {
+        add(SmellBenchmark, "Sharpness Benchmark");
+        out1.setText(l1.getText().substring(0, 1));
+        addTable("Odors.csv");
         break;
       }
       case "Primary": {
+        add(new String[]{}, "Primary");
+        addTable("Odors.csv");
         break;
       }
       case "Overtone": {
+        add(new String[]{}, "Overtone");
+        addTable("Odors.csv");
         break;
       }
       case "Nuance": {
+        add(new String[]{}, "Nuance");
+        addTable("Odors.csv");
         break;
       }
-      case "Gender": {
+      case "Diff 1/Gender": {
+        add(new String[]{}, "Gender");
+        addTable("Odors.csv");
         break;
       }
-      case "Caste": {
+      case "Diff 2/Caste": {
+        add(new String[]{}, "Caste");
+        addTable("Odors.csv");
         break;
       }
-      case "Pheromone": {
+      case "Diff 3/Pheromone": {
+        add(new String[]{}, "Pheromone");
+        addTable("Odors.csv");
+        addTable("Pheromone.csv");
         break;
       }
+      //////////////////////////////Touch
       case "Sensitivity": {
+        add(new String[]{}, "Sensitivity");
+        out1.setText(l1.getText().substring(0, 1));
         break;
       }
+      //////////////////////////////Awareness
       case "Acuity": {
+        add(new String[]{}, "Acuity");
+        out1.setText(l1.getText().substring(0, 1));
         break;
       }
+      //////////////////////////////Perception
       case "Tone": {
+        add(new String[]{}, "Tone");
+        out1.setText(l1.getText().substring(0, 1));
         break;
       }
       case "PVoice": {
+        add(new String[]{}, "PVoice");
+//        out2.setText(l1.getText().substring(1, 2));
         break;
       }
       default: {
@@ -864,24 +1021,57 @@ public class SensesController implements Initializable {
     showLines(lines);
   }
 
+  private void add(String[] stringarray, String title) {
+    //<editor-fold defaultstate="collapsed" desc="IFD">
+    {
+      String s = "";
+      boolean DEBUG = true;  // true or false;
+      if (DEBUG) { // true or false
+        s += "//////////////////////////////////////////////" + CRLF;
+        s += "\t" + Thread.currentThread().getStackTrace()[1].getMethodName() + CRLF;
+        //s += "" + " = " + "";
+        //s += "" + " = " + "";
+        System.out.print(s);
+      }
+    }
+    //</editor-fold>
+    TEXT += CRLF + CRLF + "\t" + title.toUpperCase();
+    for (int i = 0; i < stringarray.length; i++) {
+      TEXT += CRLF + stringarray[i];
+    }
+    TEXT += CRLF;
+    LINES = new String[]{TEXT};
+    lines = LINES;
+  }
+
   private void addTable(String txt) throws IOException {
-    String old = ta.getText();
+    //<editor-fold defaultstate="collapsed" desc="IFD">
+    {
+      String s = "";
+      boolean DEBUG = true;  // true or false;
+      if (DEBUG) { // true or false
+        s += "//////////////////////////////////////////////" + CRLF;
+        s += "\t" + Thread.currentThread().getStackTrace()[1].getMethodName() + CRLF;
+        //s += "" + " = " + "";
+        //s += "" + " = " + "";
+        System.out.print(s);
+      }
+    }
+    //</editor-fold>
     try {
-      System.out.println("addTable " + txt);
       String s = "C://T5/Senses/src/senses/" + txt;
       try (BufferedReader br = new BufferedReader(new FileReader(s))) {
         String contents;
-        TEXT += CRLF;
+        TEXT += "\n";
         while ((contents = br.readLine()) != null) {
-          String line = contents.replace("\"", "").replace(",", "   ");
+          String line = contents.replace("\"", "").replace(",", "\t\t");
           TEXT += line + CRLF;
         }
       }
-      lines = new String[]{TEXT};
-//      add(lines, txt);
     } catch (FileNotFoundException ex) {
       Logger.getLogger(SensesController.class.getName()).log(Level.SEVERE, null, ex);
     }
+    lines = new String[]{TEXT};
   }
 
   /*
