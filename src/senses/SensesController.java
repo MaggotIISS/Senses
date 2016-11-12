@@ -6,7 +6,6 @@
 package senses;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
@@ -866,18 +865,13 @@ public class SensesController implements Initializable {
       }
     }
     //</editor-fold>
-    try {
-      String s = "C://T5/Senses/src/senses/" + txt;
-      try (BufferedReader br = new BufferedReader(new FileReader(s))) {
-        String contents;
-        TEXT += "\n";
-        while ((contents = br.readLine()) != null) {
-          String line = contents.replace("\"", "").replace(",", "\t\t");
-          TEXT += line + CRLF;
-        }
-      }
-    } catch (FileNotFoundException ex) {
-      Logger.getLogger(SensesController.class.getName()).log(Level.SEVERE, null, ex);
+    String s = "C://T5 Extra/Senses/src/senses/" + txt;
+    BufferedReader br = new BufferedReader(new FileReader(s));
+    String contents;
+    TEXT += "\n";
+    while ((contents = br.readLine()) != null) {
+      String line = contents.replace("\"", "").replace(",", "\t\t");
+      TEXT += line + CRLF;
     }
     lines = new String[]{TEXT};
   }
