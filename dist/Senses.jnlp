@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Senses.jar" size="16079" download="eager" />
+    <jar href="Senses.jar" size="16115" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Senses" >
     <param name="requiredFXVersion" value="8.0+"/>
